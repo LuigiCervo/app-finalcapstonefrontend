@@ -1,24 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
+
+import { useState } from 'react';
 import './App.css';
+import { Dish } from './models/Dish';
 
 function App() {
+  const [dishes, setDishes] = useState<Dish[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  fetch("http://localhost:8080/api/dish/list")
+    .then(response => response.json())
+    .then(response => {
+      setDishes(response);
+      setIsLoading(false)
+    });
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Menu</h1>
+      <ul>
+        {
+          !isLoading &&
+          dishes.map(dish =>
+            <li key={dish.id} className='card'>
+              <p className='card-header'>{dish.name}</p>
+              <img src={dish.image} alt="" />
+            </li>
+          )
+        }
+      </ul>
     </div>
   );
 }
