@@ -1,33 +1,42 @@
-import { useState } from 'react';
-import './App.css';
-import { Dish } from './models/Dish';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import DishManager from "./pages/DishManager";
+import { Container, Nav, NavDropdown, Navbar } from "react-bootstrap";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
-  const [dishes, setDishes] = useState<Dish[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-
-  fetch("http://localhost:8080/api/dish/list")
-    .then(response => response.json())
-    .then(response => {
-      setDishes(response);
-      setIsLoading(false)
-    });
-
   return (
-    <div className="App">
-      <h1>Menu</h1>
-      <ul>
-        {
-          !isLoading &&
-          dishes.map(dish =>
-            <li key={dish.id} className='card'>
-              <p className='card-header'>{dish.name}</p>
-              <img src={dish.image} alt="" />
-            </li>
-          )
-        }
-      </ul>
-    </div>
+    <main>
+      <Navbar>
+        <Container>
+          <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="me-auto">
+              <Nav.Link href="#home">Home</Nav.Link>
+              <Nav.Link href="#link">Link</Nav.Link>
+              <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.2">
+                  Another action
+                </NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item href="#action/3.4">
+                  Separated link
+                </NavDropdown.Item>
+              </NavDropdown>
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+
+      <BrowserRouter basename='/'>
+        <Routes>
+          <Route path='/' element={<DishManager />} />
+          <Route path='/admin/dish' element={<DishManager />} />
+        </Routes>
+      </BrowserRouter>
+    </main>
   );
 }
 
