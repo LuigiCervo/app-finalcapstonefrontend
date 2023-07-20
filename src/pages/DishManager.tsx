@@ -54,7 +54,7 @@ function DishListItem(props: { dish: Dish, manufacturers: Manufacturer[], onSucc
 
   return !isEditing ? (
     <Card className='card'>
-      <Card.Img variant='top' src={props.dish.image} />
+      <Card.Img variant='top' src={`/img/dishes/${props.dish?.image}`} />
       <Card.Body>
         <Card.Title>{props.dish.price}$ | {props.dish.name}</Card.Title>
         <Card.Text>{props.dish.description}</Card.Text>
@@ -65,7 +65,7 @@ function DishListItem(props: { dish: Dish, manufacturers: Manufacturer[], onSucc
     </Card>
   ) : (
     <Card className='card'>
-      <Card.Img variant='top' src={editedDish.image} />
+      <Card.Img variant='top' src={`/img/dishes/${editedDish?.image}`} />
       <Card.Body>
         <Form>
           <Form.Group as={Row} className='mb-3'>
