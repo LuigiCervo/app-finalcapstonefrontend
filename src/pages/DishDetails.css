@@ -8,8 +8,15 @@ h2 {
     font-size: 2.5em;
 }
 
+h3 {
+    font-family: 'Lugrasimo';
+    font-size: 2.5em;
+}
+
 #dish-image {
     width: 75%;
+    border: 2px solid #F9C448;
+    border-radius: 16px;
 }
 
 #manufacturer-logo {

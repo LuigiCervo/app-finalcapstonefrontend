@@ -1,6 +1,6 @@
 import { JwtPayload } from "jwt-decode";
 
-export default interface Token extends JwtPayload {
+export default interface User extends JwtPayload {
     name: string;
     admin: boolean;
     golden: boolean;

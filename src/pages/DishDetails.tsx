@@ -30,14 +30,10 @@ function DishDetails() {
                             <h2 className='mt-3'>By {dish?.manufacturer.name}</h2>
                         </div>
                     }
-                    {
-                        dish?.manufacturer != null && dish?.description != null &&
-                        <hr />
-                    }
-                    {
-                        dish?.description != null &&
-                        <p>{dish?.description}</p>
-                    }
+                    <hr />
+                    <p>{dish?.description}</p>
+                    <hr />
+                    <h3 className='text-start'>{dish?.price} $</h3>
                 </Col>
             </Row>
         </Container>

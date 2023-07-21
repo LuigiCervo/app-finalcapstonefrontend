@@ -1,17 +1,22 @@
-import { BrowserRouter, NavLink, Route, Routes } from "react-router-dom";
-import DishManager from "./pages/DishManager";
-import { Container, Nav, NavDropdown, Navbar } from "react-bootstrap";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import { Index } from "./pages/Index";
-import DishDetails from "./pages/DishDetails";
-import './App.css';
+//External libs imports
 import { useState } from "react";
+import { BrowserRouter, NavLink, Route, Routes } from "react-router-dom";
+import { Container, Nav, NavDropdown, Navbar } from "react-bootstrap";
+//Internal modules
+import Index from "./pages/Index";
+import Register from "./pages/Register";
+import Login from "./pages/Login";
+import Logout from "./pages/Logout";
+import DishDetails from "./pages/DishDetails";
+import DishManager from "./pages/DishManager";
+import User from "./dto/User";
+//CSS
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
 
-function App() {
+export default function App() {
 
-  const [token, setToken] = useState<any | null>(null);
+  const [authState, setAuthState] = useState<{ token: string, user: User } | null>(null);
 
   return (
     <main>
@@ -23,21 +28,34 @@ function App() {
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
                 <NavLink className="mx-2 nav-link" to="/">Menu</NavLink>
-                <NavLink className="mx-2 nav-link" to="/bundles">Promozioni</NavLink>
-                <NavDropdown className="mx-2" title="Scopri di più" id="basic-nav-dropdown">
-                  <NavDropdown.Item href="#action/3.1">Prenota un appuntamento</NavDropdown.Item>
-                  <NavDropdown.Item href="#action/3.3">Modifica menu</NavDropdown.Item>
-                  <NavDropdown.Divider />
-                  <NavDropdown.Item href="#action/3.4">
-                    Separated link
-                  </NavDropdown.Item>
-                </NavDropdown>
+                <NavLink className="mx-2 nav-link" to="/bundles">Bundles</NavLink>
+                <NavLink className="mx-2 nav-link" to="/book">Book an appointment</NavLink>
               </Nav>
 
-              <Nav className="justify-self-end">
-                <NavLink className="mx-2 nav-link" to="/login">LogIn</NavLink>
-                <NavLink className="mx-2 nav-link" to="/register">Register</NavLink>
-              </Nav>
+              {
+                authState == null &&
+                <Nav className="justify-self-end">
+                  <NavLink className="mx-2 nav-link" to="/login">Log In</NavLink>
+                  <NavLink className="mx-2 nav-link" to="/register">Register</NavLink>
+                </Nav>
+              }
+              {
+                authState != null &&
+                <Nav className="justify-self-end">
+                  <NavDropdown className="mx-2" title={authState.user.name} id="basic-nav-dropdown">
+                    {
+                      authState.user.admin &&
+                      <NavDropdown.Item>Admin Account</NavDropdown.Item>
+                    }
+                    {
+                      authState.user.golden &&
+                      <NavDropdown.Item>Golden Account</NavDropdown.Item>
+                    }
+                  </NavDropdown>
+
+                  <NavLink className="mx-2 nav-link" to="/logout">Log Out</NavLink>
+                </Nav>
+              }
             </Navbar.Collapse>
           </Container>
         </Navbar>
@@ -45,13 +63,12 @@ function App() {
         <Routes>
           <Route path='/' element={<Index />} />
           <Route path='/dish/:id' element={<DishDetails />} />
-          <Route path='/login' element={<Login setTokenAction={setToken} />} />
           <Route path='/register' element={<Register />} />
+          <Route path='/login' element={<Login setAuthStateAction={setAuthState} />} />
+          <Route path='/logout' element={<Logout setAuthStateAction={setAuthState} />} />
           <Route path='/admin/dish' element={<DishManager />} />
         </Routes>
       </BrowserRouter>
     </main >
   );
 }
-
-export default App;

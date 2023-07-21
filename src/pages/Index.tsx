@@ -1,19 +1,19 @@
-import { ChangeEvent, useState, useEffect } from 'react';
-import { Card, Col, Container, Row } from 'react-bootstrap';
+import { useState, useEffect } from 'react';
+import { Container } from 'react-bootstrap';
 import { Dish } from '../models/Dish';
 import { getDishList } from '../service/DishService';
 import { Link } from 'react-router-dom';
 import './Index.css';
 
-export function Index() {
+export default function Index() {
 
     const [dishes, setDishes] = useState<Dish[]>([]);
-    const [menu, setMenu] = useState<{ sectionName: string, indices: number[] }[]>([
-        { sectionName: "Antipasti", indices: [5, 6, 7, 8] },
-        { sectionName: "Primi", indices: [11, 12, 13, 14] },
-        { sectionName: "Secondi", indices: [15, 16, 17, 19] },
-        { sectionName: "Contorni", indices: [20, 21, 26] },
-        { sectionName: "Dessert", indices: [22, 23, 24, 25] }
+    const [menu] = useState<{ sectionName: string, indices: number[] }[]>([
+        { sectionName: "Appetizers", indices: [5, 6, 7, 8] },
+        { sectionName: "Main courses", indices: [11, 12, 13, 14] },
+        { sectionName: "Second courses", indices: [15, 16, 17, 19] },
+        { sectionName: "Side dishes", indices: [20, 21, 26] },
+        { sectionName: "Desserts", indices: [22, 23, 24, 25] }
     ]);
 
     useEffect(() => {
@@ -30,8 +30,8 @@ export function Index() {
                         <ul className='list-unstyled'>
                             {
                                 section.indices.map(index => {
-                                    var d = dishes.filter(dish => dish.id == index)[0];
-                                    return <li><p><i>{d?.name + " | " + d?.price + "$"}   <Link to={`/dish/${index}`}>(details)</Link></i></p></li>
+                                    var d = dishes.filter(dish => dish.id === index)[0];
+                                    return <li><p><i>{d?.name + " | " + d?.price + "$"} <Link to={`/dish/${index}`} className='detailsLink'>(details)</Link></i></p></li>
                                 })
                             }
                         </ul>

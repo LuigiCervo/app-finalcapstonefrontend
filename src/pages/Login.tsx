@@ -1,11 +1,10 @@
 import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
-import './Login.css';
-import { useState } from "react";
 import LoginDTO from "../dto/Login";
-import jwtDecode, { JwtPayload } from "jwt-decode";
-import Token from "../dto/Token";
+import { useNavigate } from "react-router-dom";
 
-function Login(props: { setTokenAction(token: any): void }) {
+export default function Login(props: { setAuthStateAction(token: any): void }) {
+
+    const navigate = useNavigate();
 
     function LoginFunction() {
         const emailInput: HTMLInputElement = document.getElementById('emailField') as HTMLInputElement;
@@ -22,12 +21,10 @@ function Login(props: { setTokenAction(token: any): void }) {
         }).then(response => {
             console.log(response.status);
             if (response.ok) {
-                response.text().then(token => {
-                    console.log("Token: " + token);
-                    var tokenPayload: any = jwtDecode<any>(token, { header: false });
-                    console.log("Decoded Token: " + tokenPayload);
-                    props.setTokenAction(token);
-                })
+                response.text().then(tokenString => {
+                    props.setAuthStateAction({ token: tokenString, user: JSON.parse(atob(tokenString.split('.')[1])) });
+                    navigate('/');
+                });
             }
         })
     }
@@ -55,5 +52,3 @@ function Login(props: { setTokenAction(token: any): void }) {
         </Container>
     );
 }
-
-export default Login;
