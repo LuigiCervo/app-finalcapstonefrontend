@@ -1,8 +1,9 @@
-import { ChangeEvent, useState, useEffect } from 'react';
-import { Card, Carousel, Col, Container, Row } from 'react-bootstrap';
+import { useState, useEffect } from 'react';
+import { Col, Container, Row } from 'react-bootstrap';
 import { Dish } from '../models/Dish';
-import { getDishById, getDishList } from '../service/DishService';
-import { Link, useParams } from 'react-router-dom';
+import { getDishById } from '../service/DishService';
+import { useParams } from 'react-router-dom';
+import './DishDetails.css';
 
 function DishDetails() {
 
@@ -12,13 +13,33 @@ function DishDetails() {
 
     useEffect(() => {
         getDishById(Number(params.id)).then(d => setDish(d));
-    }, []);
+    }, [params.id]);
 
     return (
-        <Container>
-            <h1>{dish?.name}</h1>
-            <img src={`/img/dishes/${dish?.image}`} />
-            <p>{dish?.description}</p>
+        <Container className='text-center text-white'>
+            <h1><i>{dish?.name}</i></h1>
+            <Row className='mt-5'>
+                <Col xs={8}>
+                    <img id='dish-image' src={`/img/dishes/${dish?.image}`} alt='' />
+                </Col>
+                <Col xs={4}>
+                    {
+                        dish?.manufacturer != null &&
+                        <div className='text-center mt-5'>
+                            <img id='manufacturer-logo' src={`/img/manufacturer/${dish?.manufacturer.image}`} alt='' />
+                            <h2 className='mt-3'>By {dish?.manufacturer.name}</h2>
+                        </div>
+                    }
+                    {
+                        dish?.manufacturer != null && dish?.description != null &&
+                        <hr />
+                    }
+                    {
+                        dish?.description != null &&
+                        <p>{dish?.description}</p>
+                    }
+                </Col>
+            </Row>
         </Container>
     );
 }
