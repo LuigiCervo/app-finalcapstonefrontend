@@ -1,6 +1,6 @@
 import { Dish } from "./Dish";
 
-export interface Manufacturer {
+export default interface Bundle {
     id: number;
     name: string;
     discount: number;

@@ -30,8 +30,8 @@ export default function Login(props: { setAuthStateAction(token: any): void }) {
     }
 
     return (
-        <Container>
-            <Row className="justify-content-center mt-5">
+        <Container className="mb-5">
+            <Row className="justify-content-center mt-5 mb-5">
                 <Col xs={4}>
                     <Card className="p-4" bg='dark' text="light">
                         <h1 className="text-center">Login</h1>

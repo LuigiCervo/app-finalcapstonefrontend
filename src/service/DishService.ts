@@ -1,9 +1,9 @@
 import { Dish } from "../models/Dish";
+import { API_GATEWAY_HOST } from "./ServiceCostants";
 
-const HOST: string = "http://localhost:8080";
 
 function createDish(dish: Dish): Promise<boolean> {
-    return fetch(`${HOST}/api/dish/`,
+    return fetch(`${API_GATEWAY_HOST}/api/dish/`,
         {
             method: "POST",
             headers: {
@@ -28,7 +28,7 @@ function getDishById(id: number): Promise<Dish | null> {
     // StatusCode Check
     // 200 -> OK		-> Dish
     // 404 -> NOT FOUND -> null
-    return fetch(`${HOST}/api/dish/${id}`)
+    return fetch(`${API_GATEWAY_HOST}/api/dish/${id}`)
         .then(response => {
             switch (response.status) {
                 case 200:
@@ -43,7 +43,7 @@ function getDishById(id: number): Promise<Dish | null> {
 }
 
 function getDishList(): Promise<Dish[]> {
-    return fetch(`${HOST}/api/dish/list`)
+    return fetch(`${API_GATEWAY_HOST}/api/dish/list`)
         .then(response => {
             switch (response.status) {
                 case 200:
@@ -56,7 +56,7 @@ function getDishList(): Promise<Dish[]> {
 }
 
 function updateDishById(id: number, newDish: Dish): Promise<boolean> {
-    return fetch(`${HOST}/api/dish/${id}`,
+    return fetch(`${API_GATEWAY_HOST}/api/dish/${id}`,
         {
             method: "PUT",
             headers: {
@@ -76,7 +76,7 @@ function updateDishById(id: number, newDish: Dish): Promise<boolean> {
 }
 
 function deleteDishById(id: number): Promise<boolean> {
-    return fetch(`${HOST}/api/dish/${id}`)
+    return fetch(`${API_GATEWAY_HOST}/api/dish/${id}`)
         .then(response => {
             switch (response.status) {
                 case 200:

@@ -219,9 +219,9 @@ function DishManager() {
 
   return (
     <Container>
-      <h1>Dish management page</h1>
+      <h1 className='text-light'>Dish management page</h1>
 
-      <h2>Dishes:</h2>
+      <h2 className='text-light'>Dishes:</h2>
 
       <Container fluid='true'>
         <Row xs={2}>
@@ -251,9 +251,9 @@ function DishManager() {
       <div>
 
         <div>
-          <h2>New Dish form</h2>
+          <h2 className='text-light'>New Dish form</h2>
           <div>
-            <label htmlFor="inputDishName">Name</label><br />
+            <label className='text-light' htmlFor="inputDishName">Name</label><br />
             <input id='inputDishName' type='text'
               placeholder='name'
               onChange={(e) => {
@@ -261,7 +261,7 @@ function DishManager() {
                 setNewDish(newDish);
               }}></input><br />
 
-            <label htmlFor="inputDishDescription">Description</label><br />
+            <label className='text-light' htmlFor="inputDishDescription">Description</label><br />
             <input
               id='inputDishDescription'
               type='text'
@@ -272,7 +272,7 @@ function DishManager() {
                 setNewDish(temp);
               }}></input><br />
 
-            <label htmlFor="inputDishManufacturer">Manufacturer</label><br />
+            <label className='text-light' htmlFor="inputDishManufacturer">Manufacturer</label><br />
             <select
               id='inputDishManufacturer'
               onChange={(e) => {
@@ -282,12 +282,11 @@ function DishManager() {
                 }
               }}>
               {
-                isLoading &&
-                manufacturers.map(manufacturer => <option key={manufacturer.id} value={manufacturer.id}>{manufacturer.name}</option>)
+                manufacturers.map(manufacturer => <option key={manufacturer.id} value={manufacturer.name}>{manufacturer.name}</option>)
               }
             </select><br />
 
-            <label htmlFor="inputDishImageLink">Image Link</label><br />
+            <label className='text-light' htmlFor="inputDishImageLink">Image Link</label><br />
             <input
               id='inputDishImageLink'
               type='text'
@@ -298,7 +297,7 @@ function DishManager() {
                 setNewDish(temp);
               }}></input><br />
 
-            <button onClick={() => addDish(newDish)}>Add</button>
+            <button className='mt-2' onClick={() => addDish(newDish)}>Add</button>
           </div>
           <div style={{ border: "2px solid black" }}>
             <h3>{newDish?.name}</h3>
@@ -307,7 +306,7 @@ function DishManager() {
             <img src={newDish?.image} width={300}></img><br />
           </div>
         </div>
-        <input type='text' placeholder='Search...' onChange={(e) => { setSearchString(e.target.value) }}></input>
+        <input className='mb-3' type='text' placeholder='Search...' onChange={(e) => { setSearchString(e.target.value) }}></input>
 
       </div>
     </Container>
