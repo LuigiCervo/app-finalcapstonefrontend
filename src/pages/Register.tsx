@@ -31,7 +31,7 @@ export default function Register() {
     }
 
     return (
-        <Container>
+        <Container className="mb-5">
             <Row className="justify-content-center mt-5">
                 <Col xs={4}>
                     <Card className="p-4" bg='dark' text="light">
