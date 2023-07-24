@@ -96,7 +96,7 @@ For a more exclusive experience, you can log in as a Golden User:
 - Email: johnwick@example.it
 - Password: 12345
 
-Golden Users enjoy special privileges and secret menus at the Continental Restaurant.
+Golden Users enjoy special privileges like a huge discount on the "Bundles" section at the Continental Restaurant.
 
 ## Technologies Used 💻
 
