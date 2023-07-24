@@ -2,7 +2,7 @@
 
 Welcome to the Continental Restaurant website! 🎉
 
-![Continental Restaurant Logo]([logo](https://tse1.mm.bing.net/th?id=OIP.U30YGYxLpm6zxzh15Rp3MAHaEJ&pid=Api&rs=1&c=1&qlt=95&w=170&h=95).png)
+![Continental Restaurant Logo](https://tse1.mm.bing.net/th?id=OIP.U30YGYxLpm6zxzh15Rp3MAHaEJ&pid=Api&rs=1&c=1&qlt=95&w=170&h=95.png)
 
 ## Table of Contents 📑
 
