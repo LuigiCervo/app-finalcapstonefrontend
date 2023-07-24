@@ -15,7 +15,6 @@ Welcome to the Continental Restaurant website! 🎉
 - [Golden User Account](#golden-user-account)
 - [Technologies Used](#technologies-used)
 - [Contributing](#contributing)
-- [License](#license)
 
 ## Introduction 🍽️
 
