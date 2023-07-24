@@ -112,10 +112,6 @@ This project was developed using the following technologies:
 
 We welcome contributions to enhance the Continental Restaurant website! If you find any issues or have ideas for improvements, please feel free to open an issue or submit a pull request.
 
-## License 📜
-
-The Continental Restaurant website is licensed under the [MIT License](link_to_license_file).
-
 ---
 
 Enjoy your experience at the Continental Restaurant! If you have any questions or need further assistance, please don't hesitate to reach out to us. Happy dining! 🍽️🎊
