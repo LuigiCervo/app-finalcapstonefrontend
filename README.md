@@ -2,7 +2,7 @@
 
 Welcome to the Continental Restaurant website! 🎉
 
-![Continental Restaurant Logo](link_to_logo_image.png)
+![Continental Restaurant Logo](logo.png)
 
 ## Table of Contents 📑
 
