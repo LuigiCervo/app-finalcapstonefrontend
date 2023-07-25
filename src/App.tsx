@@ -18,6 +18,7 @@ import './App.css';
 import { Telephone } from "react-bootstrap-icons";
 import { EnvelopeAt } from "react-bootstrap-icons";
 import { GeoAlt } from "react-bootstrap-icons";
+import ReservationPage from "./pages/ReservationPage";
 
 
 export default function App() {
@@ -37,7 +38,10 @@ export default function App() {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
-                <NavLink className="mx-2 nav-link" to="/bundles">Bundles</NavLink> &&
+                {
+                  authState != null &&
+                  <NavLink className="mx-2 nav-link" to="/bundles">Bundles</NavLink>
+                }
                 <NavLink className="mx-2 nav-link" to="/book">Book an appointment</NavLink>
               </Nav>
 
@@ -66,6 +70,10 @@ export default function App() {
                       authState.user.golden &&
                       <NavDropdown.Item>Golden Account</NavDropdown.Item>
                     }
+                    {
+                      !authState.user.golden && !authState.user.admin &&
+                      <NavDropdown.Item>Standard Account</NavDropdown.Item>
+                    }
                   </NavDropdown>
 
                   <NavLink className="mx-2 nav-link" to="/logout">Log Out</NavLink>
@@ -79,6 +87,7 @@ export default function App() {
           <Route path='/' element={<Index />} />
           <Route path='/dish/:id' element={<DishDetails />} />
           <Route path='/bundles' element={<Bundles authState={authState} />} />
+          <Route path='/book' element={<ReservationPage authState={authState} />} />
           <Route path='/register' element={<Register />} />
           <Route path='/login' element={<Login setAuthStateAction={setAuthState} />} />
           <Route path='/logout' element={<Logout setAuthStateAction={setAuthState} />} />

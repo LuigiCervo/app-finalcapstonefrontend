@@ -3,6 +3,9 @@ import { Dish } from '../models/Dish';
 import { Manufacturer } from '../models/Manufacturer';
 import { createDish, deleteDishById, getDishList, updateDishById } from '../service/DishService';
 import { Button, Card, Col, Container, Form, InputGroup, Modal, Row } from 'react-bootstrap';
+import { Reservation } from '../models/Reservation';
+import { Check2, Check2All, Check2Square, CheckCircleFill, Trash3Fill } from 'react-bootstrap-icons';
+import { Check } from 'react-bootstrap-icons';
 
 function DishListItem(props: { dish: Dish, manufacturers: Manufacturer[], onSuccesfulDeletion(dishId: number, dish: Dish): void, onSuccesfulEdit(dishId: number, dish: Dish): void }) {
   const [isEditing, setIsEditing] = useState(false);
@@ -59,8 +62,8 @@ function DishListItem(props: { dish: Dish, manufacturers: Manufacturer[], onSucc
         <Card.Title>{props.dish.price}$ | {props.dish.name}</Card.Title>
         <Card.Text>{props.dish.description}</Card.Text>
         {props.dish.manufacturer != null && <Card.Text>Manufacturer: {props.dish.manufacturer.name}</Card.Text>}
-        <button className='btn btn-primary' onClick={onEdit}>Edit</button>
-        <button className='btn btn-danger ms-2' onClick={onDelete}>Delete</button>
+        <button className='btn btn-primary' onClick={onEdit}><CheckCircleFill></CheckCircleFill></button>
+        <button className='btn btn-danger ms-2' onClick={onDelete}><Trash3Fill></Trash3Fill></button>
       </Card.Body>
     </Card>
   ) : (
@@ -152,6 +155,7 @@ function DishListItem(props: { dish: Dish, manufacturers: Manufacturer[], onSucc
 
 function DishManager() {
   const [dishes, setDishes] = useState<Dish[]>([]);
+  const [reservations, setReservations] = useState<Reservation[]>([]);
   const [manufacturers, setManufacturers] = useState<Manufacturer[]>([]);
 
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -175,7 +179,11 @@ function DishManager() {
       .then(response => response.json())
       .then(json => setManufacturers(json));
 
-    Promise.all([dishPromise, manufacturerPromise])
+    let reservationPromise = fetch("http://localhost:8080/api/reservation/list")
+      .then(response => response.json())
+      .then(json => setReservations(json));
+
+    Promise.all([dishPromise, manufacturerPromise, reservationPromise])
       .then(() => setIsLoading(false));
   }, []);
 
@@ -217,9 +225,30 @@ function DishManager() {
       });
   }
 
+  function deleteReservation(id: number) {
+    fetch("http://localhost:8080/api/reservation/" + id,
+      {
+        method: 'DELETE'
+      }).then(response => {
+        if (response.ok) {
+          setReservations(reservations.filter(r => r.id != id));
+        }
+      })
+  }
+
   return (
     <Container>
-      <h1 className='text-light'>Dish management page</h1>
+      <h1 className='text-light'>Reservations: {reservations.length}</h1>
+      <ul className='list-group'>
+        {
+          reservations.map(r =>
+            <li className='list-group-item'>
+              <button className='btn btn-danger mx-3' onClick={() => deleteReservation(r.id)}><Trash3Fill></Trash3Fill></button>
+              {r.guest.firstName} {r.guest.lastName}, {r.reservationTime} for {r.seats}
+            </li>)
+        }
+      </ul>
+      <h1 className='text-light mt-5'>Dish management page</h1>
 
       <h2 className='text-light'>Dishes:</h2>
 

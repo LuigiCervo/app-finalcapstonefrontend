@@ -76,7 +76,10 @@ function updateDishById(id: number, newDish: Dish): Promise<boolean> {
 }
 
 function deleteDishById(id: number): Promise<boolean> {
-    return fetch(`${API_GATEWAY_HOST}/api/dish/${id}`)
+    return fetch(`${API_GATEWAY_HOST}/api/dish/${id}`,
+        {
+            method: "DELETE"
+        })
         .then(response => {
             switch (response.status) {
                 case 200:
