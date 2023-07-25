@@ -242,7 +242,7 @@ function DishManager() {
       <ul className='list-group'>
         {
           reservations.map(r =>
-            <li className='list-group-item'>
+            <li className='list-group-item mb-1'>
               <button className='btn btn-danger mx-3' onClick={() => deleteReservation(r.id)}><Trash3Fill></Trash3Fill></button>
               {r.guest.firstName} {r.guest.lastName}, {r.reservationTime} for {r.seats}
             </li>)
