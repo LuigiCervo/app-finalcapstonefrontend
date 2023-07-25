@@ -84,7 +84,7 @@ Please replace `your_postgres_username` with your actual PostgreSQL username and
 
 You can access the website's admin account with the following credentials:
 
-- Email: luigicervo@example.it
+- Email: luigicervo@example.com
 - Password: 12345
 
 As an admin, you'll have access to manage and update the website's content.
@@ -93,7 +93,7 @@ As an admin, you'll have access to manage and update the website's content.
 
 For a more exclusive experience, you can log in as a Golden User:
 
-- Email: johnwick@example.it
+- Email: johnwick@example.com
 - Password: 12345
 
 Golden Users enjoy special privileges like a huge discount on the "Bundles" section at the Continental Restaurant.
