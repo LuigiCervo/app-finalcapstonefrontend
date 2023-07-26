@@ -56,7 +56,7 @@ export default function ReservationPage(props: { authState: { token: string, use
                             </Form.Group>
                             <Form.Group className="mb-3">
                                 <Form.Label>Seats</Form.Label>
-                                <Form.Control type="" id="seatsField" defaultValue={1} />
+                                <Form.Control type="" id="seatsField" defaultValue={""} />
                             </Form.Group>
                         </Form>
                         <Button

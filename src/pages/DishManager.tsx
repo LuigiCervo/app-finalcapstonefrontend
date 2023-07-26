@@ -62,7 +62,7 @@ function DishListItem(props: { dish: Dish, manufacturers: Manufacturer[], onSucc
         <Card.Title>{props.dish.price}$ | {props.dish.name}</Card.Title>
         <Card.Text>{props.dish.description}</Card.Text>
         {props.dish.manufacturer != null && <Card.Text>Manufacturer: {props.dish.manufacturer.name}</Card.Text>}
-        <button className='btn btn-primary' onClick={onEdit}><CheckCircleFill></CheckCircleFill></button>
+        <button className='btn btn-primary' onClick={onEdit}>Edit Dish</button>
         <button className='btn btn-danger ms-2' onClick={onDelete}><Trash3Fill></Trash3Fill></button>
       </Card.Body>
     </Card>
